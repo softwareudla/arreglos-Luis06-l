@@ -195,11 +195,7 @@ int main()
             }
             
         }
-
         printf("           Aprobados\t\tReprobados \n");
-
-
-
         printf("MATEMATICA  %d\t\t%d \n",nAM, nRM );
         printf("LENGUA      %d\t\t%d \n", nAL, nRL);
         printf("FISICA      %d\t\t%d \n", nAF, nRF);
