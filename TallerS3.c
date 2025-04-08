@@ -79,23 +79,132 @@ int main()
             }
             break;
         case 3:
-        int c1=0;
-        float pr1M=0, pr1L=0, pr1F=0, pr2M=0, pr2L=0, pr2F=0;
-        printf("PROMEDIO DE ASIGNATURAS:\n");
+            int c1 = 0;
+            float pr1M = 0, pr1L = 0, pr1F = 0, pr2M = 0, pr2L = 0, pr2F = 0;
+            printf("PROMEDIO DE ASIGNATURAS:\n");
+            for (int i = 0; i < cont; i++)
+            {
+                pr1M += nMat[i];
+                pr1L += nLen[i];
+                pr1F += nFis[i];
+                c1++;
+            }
+            pr2M = pr1M / c1;
+            pr2L = pr1L / c1;
+            pr2F = pr1F / c1;
+            printf("MATEMATICA:\t %.2f\n", pr2M);
+            printf("LENGUA    :\t %.2f\n", pr2L);
+            printf("FISICA    :\t %.2f\n", pr2F);
+            break;
+        case 4:
+        int naux;
+        float min=10, max=0;
+            printf("Seleccione el numero de estudiante al que quiere visualizar\n");
+            
+            for (int i = 0; i < cont; i++)
+            {
+                printf("%i\t\t%s\n", i, nombres[i]);
+            }
+            scanf("%d", &naux);
+           
+             if(nMat[naux]>max){
+                max=nMat[naux];
+             } 
+             if(nLen[naux]>max){
+                max=nLen[naux];
+             } 
+             if(nFis[naux]>max){
+                max=nFis[naux];
+             } 
+             if(nMat[naux]<min){
+                min=nMat[naux];
+             } 
+             if(nLen[naux]<min){
+                min=nLen[naux];
+             } 
+             if(nFis[naux]<min){
+                min=nFis[naux];
+             }
+             
+             printf("La nota mas alta del estudiante %s es: %.2f\n", nombres[naux], max);
+             printf("La nota mas alta del estudiante %s es: %.2f\n", nombres[naux], min);
+             break;
+        case 5:
+        float nAltaM = 0, nAltaL=0, nAltaF=0, nBajaM = 11, nBajaL = 11, nBajaF = 11;
         for (int i = 0; i < cont; i++)
         {
-           pr1M+=nMat[i];
-            pr1L+=nLen[i];
-            pr1F+=nFis[i];
-            c1++;
+
+            if (nMat[i] > nAltaM)
+            {
+                nAltaM = nMat[i];
+            }
+            if (nLen[i] > nAltaL)
+            {
+                nAltaL = nLen[i];
+            }
+            if (nFis[i] > nAltaF)
+            {
+                nAltaF = nFis[i];
+            }
+
+            if (nMat[i] < nBajaM)
+            {
+                nBajaM = nMat[i];
+            }
+            if (nLen[i] < nBajaL)
+            {
+                nBajaL = nLen[i];
+            }
+            if (nFis[i] < nBajaF)
+            {
+                nBajaF = nFis[i];
+            }
         }
-        pr2M=pr1M/c1;
-        pr2L=pr1L/c1;
-        pr2F=pr1F/c1;
-        printf("MATEMATICA:\t %f\n", pr2M);
-        printf("LENGUA    :\t %f\n", pr2L);
-        printf("FISICA    :\t %f\n", pr2F);
+        printf("La nota mas alta de Matematica es: %.2f\n", nAltaM);
+        printf("La nota mas baja de Matematica es: %.2f\n", nBajaM);
+        printf("La nota mas alta de Lengua es    : %.2f\n", nAltaL);
+        printf("La nota mas baja de Lengua es    : %.2f\n", nBajaL);
+        printf("La nota mas alta de Fisica es    : %.2f\n", nAltaF);
+        printf("La nota mas baja de Fisica es    : %.2f\n", nBajaF);
+
         break;
+        case 6:
+        int nAM=0, nAL=0, nAF=0, nRM=0, nRL=0, nRF=0;
+        for (int i = 0; i < cont; i++)
+        {
+
+            if (nMat[i] >= 6)
+            {
+                nAM++;
+            }if(nMat[i]<6){
+                nRM++;
+            }
+            if (nLen[i] >= 6)
+            {
+                nAL++;
+            }if(nLen[i]<6){
+                nRL++;
+            
+            }
+            if (nFis[i] >= 6)
+            {
+                nAF++;
+            }if(nFis[i]<6){
+                nRF++;
+            
+            }
+            
+        }
+
+        printf("           Aprobados\t\tReprobados \n");
+
+
+
+        printf("MATEMATICA  %d\t\t%d \n",nAM, nRM );
+        printf("LENGUA      %d\t\t%d \n", nAL, nRL);
+        printf("FISICA      %d\t\t%d \n", nAF, nRF);
+        
+       break;
         default:
             break;
         }
@@ -104,125 +213,4 @@ int main()
 
     return 0;
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main(int argc, char *argv[])
-{
-
-    char id[5][10];
-    char nombres[5][30];
-    int stock[5];
-    float precio[5];
-    float total_ganancias = 0, venta = 0;
-    int opc1, cont = 0, cantidad, len;
-
-    do
-    {
-        printf("Selecciones una opcion:\n");
-        printf("1. Registrar producto\n");
-        printf("2. Vender producto\n");
-        printf("3. Reabastecer producto\n");
-        printf("4. Detalle producto\n");
-        printf("5. Total ganancias\n");
-        printf("6. Salir\n");
-        printf(">> ");
-        scanf("%d", &opc1);
-
-        switch (opc1)
-        {
-        case 1:
-            if (cont < 5)
-            {
-                printf("Ingrese el ID del producto %d: ", cont);
-                scanf("%s", &id[cont]);
-                printf("Ingrese el nombre del producto %d: ", cont);
-                fflush(stdin);
-                fgets(nombres[cont], 30, stdin);
-                len = strlen(nombres[cont]) - 1;
-                nombres[cont][len] = '\0';
-
-                printf("Ingrese el stock del producto %d: ", cont);
-                scanf("%d", &stock[cont]);
-                printf("Ingrese el precio del producto %d: ", cont);
-                scanf("%f", &precio[cont]);
-                cont++;
-            }
-            break;
-        case 2:
-            char naux[10];
-
-            printf("Seleccione el producto que desea vender\n");
-            printf("ID\t\tNombre\t\tStock\t\tPrecio\n");
-            for (int i = 0; i < cont; i++)
-            {
-                printf("%s\t\t%s\t\t%d\t\t%2.f\n", id[i], nombres[i], stock[i], precio[i]);
-            }
-            scanf("%s", &naux);
-            for (int i = 0; i < cont; i++)
-            {
-                if (strcmp(id[i], naux) == 0)
-                {
-                    printf("Ingrese la cantidad de prodcuto a vender: ");
-                    scanf("%d", &cantidad);
-                    if (cantidad <= stock[i])
-                    {
-                        venta = cantidad * precio[i];
-                        printf("EL valor de la venta es: %.2f\n", venta);
-                        total_ganancias += venta;
-                    }
-                    else
-                    {
-                        printf("No existe stock suficiente para esta venta\n");
-                    }
-                }
-            }
-            break;
-        case 3:
-            int c1 = 0;
-            printf("Seleccione el producto que desea reabastecer\n");
-            printf("ID\t\tNombre\t\tStock\t\tPrecio\n");
-            for (int i = 0; i < cont; i++)
-            {
-                printf("%s\t\t%s\t\t%d\t\t%2.f\n", id[i], nombres[i], stock[i], precio[i]);
-            }
-            scanf("%s", &naux);
-            for (int i = 0; i < cont; i++)
-            {
-                if (strcmp(id[i], naux) == 0)
-                {
-                    printf("Ingrese la cantidad de prodcuto a reabastecer: ");
-                    scanf("%d", &c1);
-                    if (c1 > 0)
-                    {
-                        stock[i] += c1;
-                        printf("EL nuevo stock es de %d\n", stock[i]);
-                    }
-                    else
-                    {
-                        printf("El stock no puede ser menor a 0\n");
-                    }
-                }
-            }
-        case 4:
-            printf("DETALLES DE LOS PRODUCTOS\n");
-            printf("ID\t\tNombre\t\tStock\t\tPrecio\n");
-            for (int i = 0; i < cont; i++)
-            {
-                printf("%s\t\t%s\t\t%d\t\t%2.f\n", id[i], nombres[i], stock[i], precio[i]);
-            }
-            break;
-        case 5:
-
-            printf("El total de ganancias es de: %f\n", total_ganancias);
-            break;
-        default:
-            break;
-        }
-
-    } while (opc1 != 6);
-
-    return 0;
-}
-*/
+  
