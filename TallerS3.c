@@ -4,7 +4,6 @@ int main()
 {
 
     int estudiantes[5];
-    char asignatura[3][15];
     char nombres[5][10];
     int opcion, cont = 0, len;
     float nMat[5], nLen[5], nFis[5];
@@ -20,8 +19,10 @@ int main()
         printf("6. Estudiantes Aprobados y Reprobados\n");
         printf("7. Salir \n");
         printf(": ");
-        scanf("%d", &opcion);
-
+        while (scanf("%d", &opcion) != 1) {
+            while (getchar() != '\n');
+            printf("Error: Debe ingresar un numero.\n: ");
+        }
         switch (opcion)
         {
         case 1:
@@ -36,46 +37,68 @@ int main()
                 do
                 {
                     printf("Ingrese la nota del estudiante en Matematica: ");
-                    scanf("%f", &nMat[cont]);
-                    if (nMat[cont] > 11 || nMat[cont] < -1)
+                   
+                    while (scanf("%f", &nMat[cont]) != 1) {
+                        
+                        while (getchar() != '\n');
+                        printf("Error: Debe ingresar un numero.\nIngrese la nota del estudiante en Matematica: ");
+                    }
+                    
+                    if (nMat[cont] > 10 || nMat[cont] < -1)
                     {
                         printf("Nota invalida\n");
                     }
 
-                } while (nMat[cont] > 11 || nMat[cont] < -1);
+                } while (nMat[cont] > 10 || nMat[cont] < -1);
                 do
                 {
                     printf("Ingrese la nota del estudiante en Lengua: ");
-                    scanf("%f", &nLen[cont]);
-                    if (nLen[cont] > 11 || nLen[cont] < -1)
+                  
+                    while (scanf("%f", &nLen[cont]) != 1) {
+                        
+                        while (getchar() != '\n');
+                        printf("Error: Debe ingresar un numero.\nIngrese la nota del estudiante en Lengua: ");
+                    }
+                    
+                    if (nLen[cont] > 10 || nLen[cont] < -1)
                     {
                         printf("Nota invalida\n");
                     }
 
-                } while (nLen[cont] > 11 || nLen[cont] < -1);
+                } while (nLen[cont] > 10 || nLen[cont] < -1);
 
                 do
                 {
                     printf("Ingrese la nota del estudiante en Fisica ");
-                    scanf("%f", &nFis[cont]);
-                    if (nFis[cont] > 11 || nFis[cont] < -1)
+                 
+                    while (scanf("%f", &nFis[cont]) != 1) {
+                        
+                        while (getchar() != '\n');
+                        printf("Error: Debe ingresar un numero.\nIngrese la nota del estudiante en Fisica ");
+                    }
+                    
+                    if (nFis[cont] > 10 || nFis[cont] < -1)
                     {
                         printf("Nota invalida\n");
                     }
 
-                } while (nFis[cont] > 11 || nFis[cont] < -1);
+                } while (nFis[cont] > 10 || nFis[cont] < -1);
                 cont++;
+            }else
+            {
+                printf("!!LIMITE DE ESTUDIANTES ALCANZADO!!");
             }
+            
             break;
         case 2:
 
             printf("NOTAS:\n");
-            printf("Nombre\t\tMatematica\t\tLengua\t\tFisica\t\tPromedios\n");
+            printf("Nombre\t\t\tMatematica\t\tLengua\t\tFisica\t\tPromedios\n");
             for (int i = 0; i < cont; i++)
             {
                 float promedio[5];
                 promedio[i] = (nMat[i] + nLen[i] + nFis[i]) / 3;
-                printf("%s\t\t%.2f\t\t\t%.2f\t\t%2.f\t\t%.2f\n", nombres[i], nMat[i], nLen[i], nFis[i], promedio[i]);
+                printf("%s\t\t\t%.2f\t\t\t%.2f\t\t%2.f\t\t%.2f\n", nombres[i], nMat[i], nLen[i], nFis[i], promedio[i]);
             }
             break;
         case 3:
@@ -103,7 +126,7 @@ int main()
             
             for (int i = 0; i < cont; i++)
             {
-                printf("%i\t\t%s\n", i, nombres[i]);
+                printf("%i\t%s\n", i, nombres[i]);
             }
             scanf("%d", &naux);
            
@@ -195,18 +218,19 @@ int main()
             }
             
         }
+
         printf("           Aprobados\t\tReprobados \n");
-        printf("MATEMATICA  %d\t\t%d \n",nAM, nRM );
-        printf("LENGUA      %d\t\t%d \n", nAL, nRL);
-        printf("FISICA      %d\t\t%d \n", nAF, nRF);
+        printf("MATEMATICA  %d      \t\t%d \n",nAM, nRM );
+        printf("LENGUA      %d      \t\t%d \n", nAL, nRL);
+        printf("FISICA      %d      \t\t%d \n", nAF, nRF);
         
        break;
+       case 7: 
+       printf("Gracias por usar nuestro programa...");
         default:
             break;
         }
 
     } while (opcion != 7);
-
     return 0;
 }
-  
